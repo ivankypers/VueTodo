@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Список задач</h1>
+    <div v-if="count() === 0"> Отлично! </div>
+    <div v-else-if="count() === 1"> Осталась одна задача! </div>
+    <div v-else>Осталось сделать задач: {{ count() }}</div>
+    <div class="list">
+      <div class="item" :class="{done: item.done}" v-for="item in tasks">
+        <input type="checkbox" v-model="item.done">
+        {{ item.text }}
+      </div>
+    </div>
+    <div class="form">
+      <input v-bind:placeholder="message" v-model="message">
+      <button @click="addTask">Добавить</button>
+    </div>
+
+    <transition name="fade">
+      <img src="ggg.gif" alt="" v-show="count() === 0">
+    </transition>
+
+  </div>
+
+
+
+
+  <script src="index.js"></script>
+</body>
+</html>
