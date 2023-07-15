@@ -4,6 +4,7 @@
   margin: 20px 0;
 }
 .item {
+  display: flex;
   margin: 10px 0;
 }
 .done {

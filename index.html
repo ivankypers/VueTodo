@@ -8,27 +8,20 @@
 </head>
 <body>
   <div id="app">
-    <h1>Список задач</h1>
-    <div v-if="count() === 0"> Отлично! </div>
-    <div v-else-if="count() === 1"> Осталась одна задача! </div>
-    <div v-else>Осталось сделать задач: {{ count() }}</div>
-    <div class="list">
-      <div class="item" :class="{done: item.done}" v-for="item in tasks">
-        <input type="checkbox" v-model="item.done">
-        {{ item.text }}
-      </div>
-    </div>
-    <div class="form">
+    <h1>Список задач <like-button :counter.sync='headerLikes'></like-button></h1>
+    <h3>Количество лайков - {{ countLikes }}</h3>
+    <div v-if="count === 0"> Отлично! </div>
+    <div v-else-if="count === 1"> Осталась одна задача! </div>
+    <div v-else>Осталось сделать задач: {{ count }}</div>
+    <task-list :tasks='unCompletedTasks' v-show='unCompletedTasks.length > 0' :title="'Задачи в работе'"></task-list>
+    <form class="form" @submit.prevent="addTask">
       <input v-bind:placeholder="message" v-model="message">
-      <button @click="addTask">Добавить</button>
-    </div>
+      <button type="submit">Добавить</button>
+      <like-button :counter.sync='formLikes'></like-button>
+    </form>
 
-    <transition name="fade">
-      <img src="ggg.gif" alt="" v-show="count() === 0">
-    </transition>
-
+    <task-list :tasks='completedTasks' v-show='completedTasks.length > 0' :title="'Завершенные задачи'"></task-list>
   </div>
-
 
 
 
